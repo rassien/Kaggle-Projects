@@ -4,22 +4,37 @@ This repository contains information and resources related to the Flood Predicti
 
 ## Overview
 
-Flooding is a critical environmental challenge that affects millions of people globally. This dataset provides a simulated environment to develop and test predictive models for flood occurrence based on historical weather and geographical data. The goal is to classify whether a flood event will occur based on the given features.
+Flooding is a critical environmental challenge that affects millions of people globally. This dataset provides a simulated environment to develop and test predictive models for flood occurrence based on various environmental, geographical, and socio-economic factors. The goal is to classify whether a flood event will occur based on the given features.
 
 ## Dataset Description
 
 The dataset consists of both training and testing files with labeled and unlabeled examples, respectively. Below are the key features:
 
-- **Features:** Various meteorological, geographical, and temporal variables, such as:
-  - `precipitation` (mm)
-  - `temperature` (°C)
-  - `soil_moisture` (% of saturation)
-  - `river_discharge` (cubic meters per second)
-  - `elevation` (meters above sea level)
-  - Temporal indicators (e.g., `month`, `day_of_week`)
+### Features
 
-- **Target Variable:**
-  - `flood`: Binary label where `1` indicates a flood occurrence and `0` indicates no flood.
+| Feature Name                     | Description                                           |
+|----------------------------------|-------------------------------------------------------|
+| `MonsoonIntensity`               | Intensity of monsoon rainfall                        |
+| `TopographyDrainage`             | Topographical factors affecting water drainage       |
+| `RiverManagement`                | Effectiveness of river management practices          |
+| `Deforestation`                  | Impact of deforestation in the area                 |
+| `Urbanization`                   | Degree of urban development                          |
+| `ClimateChange`                  | Indicators of climate change impact                  |
+| `DamsQuality`                    | Structural and operational quality of dams           |
+| `Siltation`                      | Level of silt accumulation in water bodies           |
+| `AgriculturalPractices`          | Influence of farming practices on water systems      |
+| `Encroachments`                  | Presence of unauthorized land use                    |
+| `IneffectiveDisasterPreparedness`| Quality of disaster management systems               |
+| `DrainageSystems`                | Efficiency of urban and rural drainage systems       |
+| `CoastalVulnerability`           | Susceptibility of coastal areas to flooding          |
+| `Landslides`                     | Incidence of landslides contributing to floods       |
+| `Watersheds`                     | Health and management of watershed areas             |
+| `DeterioratingInfrastructure`    | Aging or inadequate infrastructure                   |
+| `PopulationScore`                | Impact of population density                         |
+| `WetlandLoss`                    | Loss of wetlands affecting natural water regulation  |
+| `InadequatePlanning`             | Shortcomings in urban and regional planning          |
+| `PoliticalFactors`                | Political influences on flood management policies    |
+| `FloodProbability`               | Target variable (1=Flood, 0=No Flood) (train.csv)    |
 
 ### File Structure
 
@@ -27,19 +42,24 @@ The dataset consists of both training and testing files with labeled and unlabel
 - `test.csv`: Contains testing data without the target variable (for prediction).
 - `sample_submission.csv`: Example of the required submission format.
 
-### Data Fields
+## Machine Learning Models and Techniques
 
-| Column Name       | Description                                              |
-|-------------------|----------------------------------------------------------|
-| `id`              | Unique identifier for each record                       |
-| `precipitation`   | Total precipitation in millimeters                      |
-| `temperature`     | Average temperature in Celsius                          |
-| `soil_moisture`   | Percentage of soil moisture saturation                  |
-| `river_discharge` | River discharge rate (cubic meters per second)          |
-| `elevation`       | Elevation above sea level in meters                     |
-| `month`           | Month of the year (1-12)                                |
-| `day_of_week`     | Day of the week (1=Monday, 7=Sunday)                    |
-| `flood`           | Binary target variable (1=Flood, 0=No Flood) (train.csv)|
+This project leverages multiple machine learning models and techniques for flood prediction:
+
+### Models Used
+
+- **LightGBM (LGBM):** A gradient boosting framework that is fast and efficient for tabular data.
+- **H2O AutoML:** An automated machine learning platform to quickly build and optimize models.
+- **Artificial Neural Networks (ANN):** Deep learning-based approach for capturing non-linear relationships.
+- **XGBoost:** Extreme Gradient Boosting, known for its performance and accuracy in structured data tasks.
+
+### Hyperparameter Optimization
+
+- **Optuna:** Used for hyperparameter optimization across all models to achieve better performance by searching for optimal configurations.
+
+### Evaluation Metric
+
+Submissions are evaluated using the **F1-Score**, which balances precision and recall for binary classification tasks.
 
 ## Getting Started
 
@@ -47,13 +67,13 @@ The dataset consists of both training and testing files with labeled and unlabel
 
 To work with the dataset, you need:
 - Python 3.8+
-- Libraries: `pandas`, `numpy`, `matplotlib`, `seaborn`, `scikit-learn`
+- Libraries: `pandas`, `numpy`, `matplotlib`, `seaborn`, `scikit-learn`, `lightgbm`, `xgboost`, `h2o`, `optuna`
 
 ### Installation
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/flood-prediction-dataset.git
+   git clone https://github.com/rassien/flood-prediction-dataset.git
    ```
 2. Install the required dependencies:
    ```bash
@@ -75,15 +95,15 @@ To work with the dataset, you need:
    print(train_data.info())
    ```
 
-3. Build your predictive model using machine learning frameworks like `scikit-learn` or `XGBoost`.
+3. Train models and optimize hyperparameters using Optuna:
+   ```python
+   import optuna
+   # Define objective function for model optimization
+   ```
 
 ### Example Notebook
 
-Refer to the `notebooks/analysis.ipynb` file for a detailed walkthrough of data exploration and modeling.
-
-## Evaluation Metric
-
-Submissions are evaluated using the **F1-Score**, which balances precision and recall for binary classification tasks.
+Refer to the `notebooks/analysis.ipynb` file for a detailed walkthrough of data exploration, modeling, and optimization.
 
 ## Contributing
 
